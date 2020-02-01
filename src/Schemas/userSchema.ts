@@ -1,6 +1,6 @@
 import { Document, model, Schema } from 'mongoose';
 import { userInterface } from '../Interfaces/userInterface';
-
+import * as validator from 'validator'
 const userSchema = new Schema({
     firstName: {
         type: String,
@@ -12,7 +12,7 @@ const userSchema = new Schema({
                 }
                 return false;
             },
-            message:'fail validation must contain only letters'
+            message: 'fail validation must contain only letters'
         }
     },
     lastName: {
@@ -25,7 +25,16 @@ const userSchema = new Schema({
                 }
                 return false;
             },
-            message:'fail validation must contain only letters'
+            message: 'fail validation must contain only letters'
+        }
+    },
+    email: {
+        type: String,
+        required: true,
+        validate: {
+            validator: function (email) {
+                return validator.isEmail(email)
+            }
         }
     },
     userName: {
