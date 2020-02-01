@@ -15,5 +15,5 @@ userRouter
     .get(findQueryOfQueryRequest, queryRequestRouting)
 
 userRouter
-    .route('/searchByUserName/:userName')
-    .get(UserController.searchByUserName)
+    .route('/Login')
+    .post(UserController.Login)

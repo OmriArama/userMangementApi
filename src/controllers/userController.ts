@@ -74,9 +74,12 @@ export default class UserController {
             })
     }
 
-    public static searchByUserName = (req: Request, res: Response, next: NextFunction): void => {
-        userDAL.findOne({ 'userName': req.params.userName }).lean()
+    public static Login = (req: Request, res: Response, next: NextFunction): void => {
+        userDAL.findOne({ 'userName': req.body.userName,'password':req.body.password }).lean()
             .then((user: IUserModal) => {
+                if(!user){
+                    res.status(400).send('bad userName or password')
+                }
                 res.send(user);
             })
             .catch(err => {
